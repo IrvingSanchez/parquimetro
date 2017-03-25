@@ -1,4 +1,4 @@
-package com.example.irving.programauno;
+package com.example.irving.parquimetro;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 public class MainActivity extends AppCompatActivity {
 
     //  Variables
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 //  Reiniciar date
                 pago.setFin(null);
                 pago.setInicio(null);
+
+                costoHora.requestFocus();
             }
             //  Si es la primera vez que se presiona
             else
@@ -93,6 +97,22 @@ public class MainActivity extends AppCompatActivity {
             r = false;
         }
         return r;
+    }
+
+    public void onClickHora (View v)
+    {
+        int idView = v.getId();
+        switch (idView)
+        {
+            case R.id.horaInicio:
+                Toast.makeText(this,"Se establecerá la hora de inicio al presionar Iniciar",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.horaFin:
+                Toast.makeText(this,"Se establecerá la hora de fin al presionar Finalizar",
+                        Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
 

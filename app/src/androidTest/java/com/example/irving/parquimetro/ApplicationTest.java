@@ -1,4 +1,4 @@
-package com.example.irving.programauno;
+package com.example.irving.parquimetro;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

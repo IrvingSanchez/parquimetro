@@ -1,24 +1,18 @@
-package com.example.irving.programauno;
-
-import android.util.Log;
+package com.example.irving.parquimetro;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by irving on 14/03/17.
  */
+
 public class PagoEstacionamiento {
 
     private Date inicio = null;
     private Date fin = null;
-
-    public PagoEstacionamiento()
-    {
-
-    }
+    private int horas, minutos, dias;
 
     public void setFin(Date fin) {
         this.fin = fin;
@@ -65,16 +59,14 @@ public class PagoEstacionamiento {
         int iCostoFraccion = Integer.parseInt(costoFraccion);
         int pago;
 
-        ArrayList<Integer> array = getDiferencia();
-        int dias = array.get(0);
-        int hora = array.get(1);
-        int minutos = array.get(2);
-
+        //  obtiene internamente el tiempo que se estacionó
+        getTiempo();
         //  Cobra la primer hora
         pago = iCostoHora;
         //  Si excede de la primer hora
-        if (hora > 1)
+        if (horas > 0)
         {
+            // Calcula la fraccion
             int fracc = minutos;
 
             if (fracc >= 0 && fracc < 15)
@@ -90,15 +82,13 @@ public class PagoEstacionamiento {
             //  Cobra dias, si es el caso
             pago += dias * (24*iCostoHora);
             //  Cobra horas extras, menos la primera
-            pago += (hora - 1) * iCostoHora;
+            pago += (horas - 1) * iCostoHora;
         }
 
         return pago;
     }
 
-    private ArrayList<Integer> getDiferencia(){
-
-        ArrayList<Integer> array = new ArrayList<>();
+    private void getTiempo(){
 
         long diferencia = fin.getTime() - inicio.getTime();
 
@@ -115,11 +105,8 @@ public class PagoEstacionamiento {
 
         int minutosTranscurridos = (int) diferencia / minsMilli;
 
-
-        array.add(diasTranscurridos);
-        array.add(horasTranscurridos);
-        array.add(minutosTranscurridos);
-
-        return array;
+        dias = diasTranscurridos;
+        horas = horasTranscurridos;
+        minutos = minutosTranscurridos;
     }
 }
