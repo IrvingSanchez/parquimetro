@@ -2,6 +2,7 @@ package com.example.irving.parquimetro;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,30 @@ public class MainActivity extends AppCompatActivity {
         boton = (Button) findViewById(R.id.button);
         texto = (TextView) findViewById(R.id.textView);
         pago = new PagoEstacionamiento();
+        horaInicio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                {
+                    Toast.makeText(getApplicationContext(),"Se establecerá la hora de inicio al presionar Iniciar",
+                            Toast.LENGTH_SHORT).show();
+                    v.setEnabled(false);
+                }
+
+            }
+        });
+        horaFin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                {
+                    Toast.makeText(getApplicationContext(),"Se establecerá la hora de fin al presionar Finalizar",
+                            Toast.LENGTH_SHORT).show();
+                    v.setEnabled(false);
+                }
+
+            }
+        });
     }
 
     public void onClick(View v)
@@ -98,24 +123,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return r;
     }
-
-    public void onClickHora (View v)
-    {
-        int idView = v.getId();
-        switch (idView)
-        {
-            case R.id.horaInicio:
-                Toast.makeText(this,"Se establecerá la hora de inicio al presionar Iniciar",
-                        Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.horaFin:
-                Toast.makeText(this,"Se establecerá la hora de fin al presionar Finalizar",
-                        Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
-
-
-
 
 }
